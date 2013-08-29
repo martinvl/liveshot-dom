@@ -1,0 +1,19 @@
+{
+    "name":"liveshot-dom",
+    "version":"0.1.0b-1",
+    "main":"index.js",
+    "description":"DOM gui elements for LiveShot. Implements various views to LiveShot data objects.",
+    "repository":{ "type":"git",
+        "url":"https://github.com/martinvl/liveshot-dom.git"
+    },
+    "author":{
+        "name":"Martin V. Larsen",
+        "email":"martin@melvon.com"
+    },
+    "homepage":"https://github.com/martinvl/liveshot-dom",
+    "bugs":"https://github.com/martinvl/liveshot-dom/issues",
+    "dependencies":{
+        "liveshot-protocol":">=0.1",
+        "liveshot-core":">=0.1"
+    }
+}
