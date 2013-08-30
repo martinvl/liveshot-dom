@@ -1,7 +1,8 @@
 module.exports = {
     CanvasView:require('./src/CanvasView'),
     CardView:require('./src/CardView'),
-    MegalinkCardView:require('./src/megalink/MegalinkCardView')
+    MegalinkCardView:require('./src/megalink/MegalinkCardView'),
+    MegalinkRangeView:require('./src/megalink/MegalinkRangeView')
 };
 
     /*

@@ -91,15 +91,15 @@ MegalinkCardView.prototype.render = function (ctx, rect) {
 MegalinkCardView.prototype.renderTarget = function (ctx, rect) {
     CardView.prototype.renderTarget.apply(this, [ctx, rect]);
 
-    this.strokeFrame(ctx, this.getTargetRect(rect));
+    this.strokeFrame(ctx, MegalinkCardView.getTargetRect(rect));
 };
 
 MegalinkCardView.prototype.renderHeader = function (ctx, rect) {
-    this.drawFrame(ctx, this.getHeaderRect(rect));
+    this.drawFrame(ctx, MegalinkCardView.getHeaderRect(rect));
 
-    this.renderName(ctx, this.getNameRect(rect));
-    this.renderClub(ctx, this.getClubRect(rect));
-    this.renderClass(ctx, this.getClassRect(rect));
+    this.renderName(ctx, MegalinkCardView.getNameRect(rect));
+    this.renderClub(ctx, MegalinkCardView.getClubRect(rect));
+    this.renderClass(ctx, MegalinkCardView.getClassRect(rect));
 };
 
 MegalinkCardView.prototype.renderName = function (ctx, rect) {
@@ -136,14 +136,14 @@ MegalinkCardView.prototype.renderClass = function (ctx, rect) {
 };
 
 MegalinkCardView.prototype.renderShotList = function (ctx, rect) {
-    this.drawFrame(ctx, this.getShotListRect(rect));
+    this.drawFrame(ctx, MegalinkCardView.getShotListRect(rect));
 
     this.renderList(ctx, rect);
     this.renderShots(ctx, rect);
 };
 
 MegalinkCardView.prototype.renderList = function (ctx, rect) {
-    var rect = this.getShotListRect(rect);
+    var rect = MegalinkCardView.getShotListRect(rect);
 
     var numRows = this.getNumRows();
     var numColumns = this.getNumColumns();
@@ -202,7 +202,7 @@ MegalinkCardView.prototype.renderShot = function (ctx, shotNum, shot, rect) {
 MegalinkCardView.prototype.getShotRect = function (shotNum, rect) {
     var numRows = this.getNumRows();
     var numColumns = this.getNumColumns();
-    var rect = this.getShotListRect(rect);
+    var rect = MegalinkCardView.getShotListRect(rect);
 
     var cellWidth = rect.width / numColumns;
     var cellHeight = rect.height / numRows;
@@ -230,7 +230,7 @@ MegalinkCardView.prototype.getNumColumns = function () {
 };
 
 MegalinkCardView.prototype.renderSums = function (ctx, rect) {
-    var rect = this.getSumsRect(rect);
+    var rect = MegalinkCardView.getSumsRect(rect);
 
     this.drawFrame(ctx, rect);
 
@@ -281,12 +281,16 @@ MegalinkCardView.prototype.setFont = function (ctx, text, width, height) {
 };
 
 // --- Rect stuff ---
-MegalinkCardView.prototype.isPortrait = function (rect) {
+MegalinkCardView.isPortrait = function (rect) {
     return rect.width / rect.height < 1;
 };
 
 MegalinkCardView.prototype.getTargetRect = function (rect) {
-    if (this.isPortrait(rect)) {
+    return MegalinkCardView.getTargetRect(rect);
+};
+
+MegalinkCardView.getTargetRect = function (rect) {
+    if (MegalinkCardView.isPortrait(rect)) {
         return {
             x:rect.x,
             y:rect.y + .125*rect.height,
@@ -303,8 +307,8 @@ MegalinkCardView.prototype.getTargetRect = function (rect) {
     }
 };
 
-MegalinkCardView.prototype.getHeaderRect = function (rect) {
-    if (this.isPortrait(rect)) {
+MegalinkCardView.getHeaderRect = function (rect) {
+    if (MegalinkCardView.isPortrait(rect)) {
         return {
             x:rect.x,
             y:rect.y,
@@ -321,8 +325,8 @@ MegalinkCardView.prototype.getHeaderRect = function (rect) {
     }
 };
 
-MegalinkCardView.prototype.getNameRect = function (rect) {
-    var rect = this.getHeaderRect(rect);
+MegalinkCardView.getNameRect = function (rect) {
+    var rect = MegalinkCardView.getHeaderRect(rect);
 
     return {
         x:rect.x + 5,
@@ -332,8 +336,8 @@ MegalinkCardView.prototype.getNameRect = function (rect) {
     };
 };
 
-MegalinkCardView.prototype.getClubRect = function (rect) {
-    var rect = this.getHeaderRect(rect);
+MegalinkCardView.getClubRect = function (rect) {
+    var rect = MegalinkCardView.getHeaderRect(rect);
 
     return {
         x:rect.x + 5,
@@ -343,8 +347,8 @@ MegalinkCardView.prototype.getClubRect = function (rect) {
     };
 };
 
-MegalinkCardView.prototype.getClassRect = function (rect) {
-    var rect = this.getHeaderRect(rect);
+MegalinkCardView.getClassRect = function (rect) {
+    var rect = MegalinkCardView.getHeaderRect(rect);
 
     return {
         x:rect.x + rect.width - 20,
@@ -354,8 +358,8 @@ MegalinkCardView.prototype.getClassRect = function (rect) {
     };
 };
 
-MegalinkCardView.prototype.getShotListRect = function (rect) {
-    if (this.isPortrait(rect)) {
+MegalinkCardView.getShotListRect = function (rect) {
+    if (MegalinkCardView.isPortrait(rect)) {
         return {
             x:rect.x,
             y:rect.y + .625*rect.height,
@@ -372,8 +376,8 @@ MegalinkCardView.prototype.getShotListRect = function (rect) {
     }
 };
 
-MegalinkCardView.prototype.getSumsRect = function (rect) {
-    if (this.isPortrait(rect)) {
+MegalinkCardView.getSumsRect = function (rect) {
+    if (MegalinkCardView.isPortrait(rect)) {
         return {
             x:rect.x,
             y:rect.y + .875*rect.height,
