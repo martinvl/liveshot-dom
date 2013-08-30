@@ -2,7 +2,7 @@ var LiveShot = require('liveshot-core');
 var CanvasView = require('./CanvasView');
 
 function CardView() {
-    this.initialize();
+    CanvasView.prototype.constructor.apply(this);
 }
 
 CardView.prototype = new CanvasView();
@@ -21,6 +21,8 @@ CardView.prototype.setCard = function (card) {
 
 // --- Internal API ---
 CardView.prototype.initialize = function () {
+    CanvasView.prototype.initialize.apply(this);
+
     this.shotRenderer = new LiveShot.ShotRenderer();
 };
 
