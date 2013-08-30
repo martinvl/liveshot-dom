@@ -1,16 +1,16 @@
 var LiveShot = require('liveshot-core');
 var CanvasView = require('./CanvasView');
 
-function TargetView() {
-    this.shotRenderer = new LiveShot.ShotRenderer();
+function CardView() {
+    this.initialize();
 }
 
-TargetView.prototype = new CanvasView();
-TargetView.prototype.constructor = TargetView;
-module.exports = TargetView;
+CardView.prototype = new CanvasView();
+CardView.prototype.constructor = CardView;
+module.exports = CardView;
 
 // --- External API ---
-TargetView.prototype.setCard = function (card) {
+CardView.prototype.setCard = function (card) {
     this.setTarget(card.config.targetID);
     this.setGaugeSize(card.config.gaugeSize);
     this.setShots(card.result.shots);
@@ -20,7 +20,11 @@ TargetView.prototype.setCard = function (card) {
 };
 
 // --- Internal API ---
-TargetView.prototype.setTarget = function (targetID) {
+CardView.prototype.initialize = function () {
+    this.shotRenderer = new LiveShot.ShotRenderer();
+};
+
+CardView.prototype.setTarget = function (targetID) {
     if (this.targetID == targetID) {
         return;
     }
@@ -31,7 +35,7 @@ TargetView.prototype.setTarget = function (targetID) {
     this.scaler = LiveShot.targets.getScaler(this.targetID);
 };
 
-TargetView.prototype.setShots = function (shots) {
+CardView.prototype.setShots = function (shots) {
     if (this.shots == shots) {
         return;
     }
@@ -42,7 +46,7 @@ TargetView.prototype.setShots = function (shots) {
     this.shotRenderer.setShots(shots);
 };
 
-TargetView.prototype.setGaugeSize = function (gaugeSize) {
+CardView.prototype.setGaugeSize = function (gaugeSize) {
     if (this.gaugeSize == gaugeSize) {
         return;
     }
@@ -51,25 +55,35 @@ TargetView.prototype.setGaugeSize = function (gaugeSize) {
     this.shotRenderer.setStyle({gaugeSize:gaugeSize});
 };
 
-TargetView.prototype.updateScale = function () {
+CardView.prototype.updateScale = function () {
     var scale = this.scaler.getScale();
 
     this.targetRenderer.setScale(scale);
     this.shotRenderer.setScale(scale);
 };
 
-TargetView.prototype.render = function (ctx, rect) {
+CardView.prototype.render = function (ctx, rect) {
+    this.renderTarget(ctx, rect);
+};
+
+CardView.prototype.renderTarget = function (ctx, rect) {
     if (this.targetRenderer == null) {
         return;
     }
 
+    var targetRect = this.getTargetRect(rect);
+
     this.targetRenderer
         .setContext(ctx)
-        .setRect(rect)
+        .setRect(targetRect)
         .render();
 
     this.shotRenderer
         .setContext(ctx)
-        .setRect(rect)
+        .setRect(targetRect)
         .render();
+};
+
+CardView.prototype.getTargetRect = function (rect) {
+    return rect;
 };

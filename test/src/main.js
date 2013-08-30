@@ -1,16 +1,21 @@
 var LiveShot = require('../../index');
 var CardBuilder = require('liveshot-protocol').CardBuilder;
 
-var c = document.createElement('canvas');
+var cardView = new LiveShot.CardView();
+document.body.appendChild(cardView.canvas);
 
-var targetView = new LiveShot.TargetView();
-document.body.appendChild(targetView.canvas);
+var mlCardView = new LiveShot.MegalinkCardView();
+document.body.appendChild(mlCardView.canvas);
 
-var width = 400;
-var height = 300;
+var width = 300;
+var height = 400;
 var rect = {x:0, y:0, width:width, height:height};
-targetView.canvas.width = rect.width;
-targetView.canvas.height = rect.height;
+
+cardView.canvas.width = rect.width;
+cardView.canvas.height = rect.height;
+
+mlCardView.canvas.width = rect.width;
+mlCardView.canvas.height = rect.height;
 
 var cardBuilder = new CardBuilder()
     .setRange('100m')
@@ -43,7 +48,8 @@ function render() {
                  .setSeriesSum(seriesSum)
                  .setTotalSum(totalSum);
 
-    targetView.setCard(cardBuilder.getCard());
+    cardView.setCard(cardBuilder.getCard());
+    mlCardView.setCard(cardBuilder.getCard());
 }
 
 setInterval(render, 500);
