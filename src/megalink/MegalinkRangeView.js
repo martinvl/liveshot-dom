@@ -79,7 +79,6 @@ MegalinkRangeView.prototype.renderHeader = function (ctx, rect) {
     this.renderHost(ctx, rect);
     this.renderRangeRelay(ctx, rect);
     this.renderLogo(ctx, rect);
-    this.renderFirearmImage(ctx, rect);
 };
 
 MegalinkRangeView.prototype.renderHost = function (ctx, rect) {
@@ -99,7 +98,10 @@ MegalinkRangeView.prototype.renderRangeRelay = function (ctx, rect) {
 
     ctx.fillStyle = MegalinkRangeView.HEADER_FONT_COLOR;
     this.setFont(ctx, rangeRelay, rangeRelayRect.width, rangeRelayRect.height);
-    ctx.fillText(rangeRelay, rangeRelayRect.x, rangeRelayRect.y);
+
+    ctx.textBaseline = 'middle';
+    ctx.fillText(rangeRelay, rangeRelayRect.x, rangeRelayRect.y + rangeRelayRect.height/2);
+    ctx.textBaseline = 'alphabetic';
 };
 
 MegalinkRangeView.prototype.renderLogo = function (ctx, rect) {
@@ -119,28 +121,6 @@ MegalinkRangeView.prototype.renderLogo = function (ctx, rect) {
     var top = MegalinkRangeView.HEADER_MARGIN;
 
     ctx.drawImage(this.logo, left, top);
-};
-
-MegalinkRangeView.prototype.renderFirearmImage = function (ctx, rect) {
-    if (!this.firearmImage || this.firearmImage.width == 0) {
-        this.firearmImage = new Image();
-        this.firearmImage.src = 'images/rifle.jpg';
-
-        var self = this;
-        this.logo.onload = function () {
-            self.renderFirearmImage(ctx, rect);
-        };
-
-        return;
-    }
-
-    var left = MegalinkRangeView.HEADER_MARGIN;
-    var top = MegalinkRangeView.HEADER_MARGIN;
-    var ratio = this.firearmImage.height / (rect.height/2);
-    var width = this.firearmImage.width / ratio;
-    var height = this.firearmImage.height / ratio;
-
-    ctx.drawImage(this.firearmImage, left, top, width, height);
 };
 
 MegalinkRangeView.prototype.updateSize = function () {
@@ -219,10 +199,10 @@ MegalinkRangeView.prototype.setFont = function (ctx, text, width, height) {
 
 MegalinkRangeView.getRangeRelayRect = function (rect) {
     return {
-        x:rect.x + 5*MegalinkRangeView.HEADER_MARGIN,
-        y:rect.y + rect.height - 2*MegalinkRangeView.HEADER_MARGIN,
-        width:rect.width/2,
-        height:rect.height/2 - 2*MegalinkRangeView.HEADER_MARGIN
+        x:rect.x + 3*MegalinkRangeView.HEADER_MARGIN,
+        y:rect.y + MegalinkRangeView.HEADER_MARGIN,
+        width:rect.width/5,
+        height:rect.height - 2*MegalinkRangeView.HEADER_MARGIN
     };
 };
 
