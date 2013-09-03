@@ -10,7 +10,9 @@ module.exports = MegalinkRangeView;
 MegalinkRangeView.prototype.setRange = function (range) {
     this.range = range;
 
-    while (this.cardViews.length < range.cards.length) {
+    var numCards = Object.keys(range.cards).length;
+
+    while (this.cardViews.length < numCards) {
         var cardView = new MegalinkCardView();
         cardView.canvas.style.marginBottom = '-4px';
         this.el.appendChild(cardView.canvas);
@@ -18,7 +20,7 @@ MegalinkRangeView.prototype.setRange = function (range) {
         this.cardViews.push(cardView);
     }
 
-    while (this.cardViews.length > range.cards.length) {
+    while (this.cardViews.length > numCards) {
         var cardView = this.cardViews.pop();
         this.el.removeChild(cardView.canvas);
     }

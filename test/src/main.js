@@ -39,8 +39,6 @@ function updateSize() {
 }
 
 var cardBuilder = new CardBuilder()
-    .setRange('100m')
-    .setRelay('1')
     .setLane('1')
     .setName('Martin V. Larsen')
     .setClub('Rygge')

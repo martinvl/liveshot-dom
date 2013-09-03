@@ -1,6 +1,6 @@
 {
     "name":"liveshot-dom",
-    "version":"0.1.0b-1",
+    "version":"0.1.0b-2",
     "main":"index.js",
     "description":"High-level GUI support for LiveShot.",
     "repository":{ "type":"git",
