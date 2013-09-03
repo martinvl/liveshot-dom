@@ -2,7 +2,7 @@
     "name":"liveshot-dom",
     "version":"0.1.0b-1",
     "main":"index.js",
-    "description":"DOM gui elements for LiveShot. Implements various views to LiveShot data objects.",
+    "description":"High-level GUI support for LiveShot.",
     "repository":{ "type":"git",
         "url":"https://github.com/martinvl/liveshot-dom.git"
     },
