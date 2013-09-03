@@ -389,7 +389,7 @@ MegalinkCardView.getSumsRect = function (rect) {
             x:rect.x + .6*rect.width,
             y:rect.y + .80*rect.height,
             width:.4*rect.width,
-            height:.20*rect.height,
+            height:.20*rect.height
         };
     }
 };
