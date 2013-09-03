@@ -88,8 +88,10 @@ MegalinkRangeView.prototype.renderHost = function (ctx, rect) {
     ctx.fillStyle = MegalinkRangeView.HEADER_FONT_COLOR;
     this.setFont(ctx, host, hostRect.width, hostRect.height);
     ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
     ctx.fillText(host, hostRect.x + hostRect.width/2, hostRect.y + hostRect.height/2);
     ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
 };
 
 MegalinkRangeView.prototype.renderRangeRelay = function (ctx, rect) {
@@ -209,8 +211,8 @@ MegalinkRangeView.getRangeRelayRect = function (rect) {
 MegalinkRangeView.getHostRect = function (rect) {
     return {
         x:rect.x + rect.width/4,
-        y:rect.y + 2*rect.height/5,
+        y:rect.y + 2*MegalinkRangeView.HEADER_MARGIN,
         width:rect.width/2,
-        height:rect.height/2
+        height:rect.height - 4*MegalinkRangeView.HEADER_MARGIN
     };
 };
