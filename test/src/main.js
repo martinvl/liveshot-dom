@@ -1,5 +1,8 @@
 var LiveShot = require('../../index');
-var CardBuilder = require('liveshot-protocol').CardBuilder;
+var Protocol = require('liveshot-protocol');
+
+var CardBuilder = Protocol.CardBuilder;
+var RangeBuilder = Protocol.RangeBuilder;
 
 /*
 var cardView = new LiveShot.CardView();
@@ -49,6 +52,11 @@ var cardBuilder = new CardBuilder()
 .setGaugeSize(.0133)
     .setTargetID('NO_DFS_100M');
 
+var rangeBuilder = new RangeBuilder()
+    .setHost('Rygge SKL')
+    .setName('100m')
+    .setRelay('1');
+
     function render() {
         var r = Math.random();
         var value = Math.floor(Math.random() * 100)/10;
@@ -76,7 +84,9 @@ var cardBuilder = new CardBuilder()
         cards.push(cardBuilder.getCard());
     }
 
-    rangeView.setRange({cards:cards});
+    rangeBuilder.setCards(cards);
+
+    rangeView.setRange(rangeBuilder.getRange());
 }
 
 setInterval(render, 500);
