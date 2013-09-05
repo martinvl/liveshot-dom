@@ -10,7 +10,7 @@ module.exports = MegalinkRangeView;
 MegalinkRangeView.prototype.setRange = function (range) {
     this.range = range;
 
-    var numCards = Object.keys(range.cards).length;
+    var numCards = objectSize(range.cards);
 
     while (this.cardViews.length < numCards) {
         var cardView = new MegalinkCardView();
@@ -270,3 +270,13 @@ function exitFullscreen() {
         document.cancelFullscreen();
     }
 }
+
+function objectSize(object) {
+    var size = 0;
+
+    for (var key in object) {
+        ++size;
+    }
+
+    return size;
+};
