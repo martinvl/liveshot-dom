@@ -1,13 +1,13 @@
+var inherits = require('inherits');
 var LiveShot = require('liveshot-core');
 var CanvasView = require('./CanvasView');
 
 function CardView() {
-    CanvasView.prototype.constructor.apply(this);
+    this.initialize();
 }
 
-CardView.prototype = new CanvasView();
-CardView.prototype.constructor = CardView;
 module.exports = CardView;
+inherits(CardView, CanvasView);
 
 // --- External API ---
 CardView.prototype.setCard = function (card) {
