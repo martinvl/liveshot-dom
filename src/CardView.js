@@ -1,6 +1,7 @@
 var inherits = require('inherits');
 var LiveShot = require('liveshot-core');
 var CanvasView = require('./CanvasView');
+var CardBuilder = require('liveshot-protocol').CardBuilder;
 
 function CardView() {
     this.initialize();
@@ -11,9 +12,16 @@ inherits(CardView, CanvasView);
 
 // --- External API ---
 CardView.prototype.setCard = function (card) {
-    this.setTarget(card.config.targetID);
-    this.setGaugeSize(card.config.gaugeSize);
-    this.setShots(card.result.shots);
+    // TODO validate card properly
+    if (!card) {
+        card = CardBuilder.createBlankCard();
+    }
+
+    this.card = card;
+
+    this.setTarget(this.card.config.targetID);
+    this.setGaugeSize(this.card.config.gaugeSize);
+    this.setShots(this.card.result.shots);
 
     this.updateScale();
     this.draw();
@@ -23,6 +31,7 @@ CardView.prototype.setCard = function (card) {
 CardView.prototype.initialize = function () {
     CanvasView.prototype.initialize.apply(this);
 
+    this.card = CardBuilder.createBlankCard();
     this.shotRenderer = new LiveShot.ShotRenderer();
 };
 

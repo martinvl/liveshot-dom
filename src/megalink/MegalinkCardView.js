@@ -9,18 +9,6 @@ MegalinkCardView.prototype = new CardView();
 MegalinkCardView.prototype.constructor = MegalinkCardView;
 module.exports = MegalinkCardView;
 
-// --- External API ---
-MegalinkCardView.prototype.setCard = function (card) {
-    this.card = card;
-
-    this.setTarget(card.config.targetID);
-    this.setGaugeSize(card.config.gaugeSize);
-    this.setShots(card.result.shots);
-
-    this.updateScale();
-    this.draw();
-};
-
 // --- Internal API ---
 MegalinkCardView.prototype.initialize = function () {
     CardView.prototype.initialize.apply(this);
