@@ -1,13 +1,13 @@
+var inherits = require('inherits');
 var LiveShot = require('liveshot-core');
 var CardView = require('../CardView');
 
 function MegalinkCardView() {
-    CardView.prototype.constructor.apply(this);
+    this.initialize();
 }
 
-MegalinkCardView.prototype = new CardView();
-MegalinkCardView.prototype.constructor = MegalinkCardView;
 module.exports = MegalinkCardView;
+inherits(MegalinkCardView, CardView);
 
 // --- Internal API ---
 MegalinkCardView.prototype.initialize = function () {
