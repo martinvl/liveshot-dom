@@ -70,7 +70,7 @@ MegalinkRangeView.prototype.draw = function () {
 };
 
 MegalinkRangeView.prototype.drawHeader = function () {
-    var ctx = this.header.getContext('2d');
+    var ctx = this.getHeaderContext();
     var rect = {
         x:0,
         y:0,
@@ -223,6 +223,15 @@ MegalinkRangeView.getHostRect = function (rect) {
         width:rect.width/2,
         height:rect.height - 4*MegalinkRangeView.HEADER_MARGIN
     };
+};
+
+// --- Canvas context handling ---
+MegalinkRangeView.prototype.getHeaderContext = function () {
+    try {
+        G_vmlCanvasManager.initElement(this.header);
+    } catch (err) {};
+
+    return this.header.getContext('2d');
 };
 
 // --- Fullscreen handling ---

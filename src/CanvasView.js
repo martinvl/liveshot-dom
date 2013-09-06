@@ -7,10 +7,6 @@ module.exports = CanvasView;
 // --- Internal API ---
 CanvasView.prototype.initialize = function () {
     this.canvas = document.createElement('canvas');
-
-    try {
-        G_vmlCanvasManager.initElement(this.canvas);
-    } catch (err) {};
 };
 
 CanvasView.prototype.draw = function () {
@@ -21,7 +17,7 @@ CanvasView.prototype.draw = function () {
         height:this.canvas.height
     };
 
-    var ctx = this.canvas.getContext('2d');
+    var ctx = this.getContext();
 
     ctx.clearRect(rect.x, rect.y, rect.width, rect.height);
     this.render(ctx, rect);
@@ -29,4 +25,12 @@ CanvasView.prototype.draw = function () {
 
 CanvasView.prototype.render = function (ctx, rect) {
     // to be overloaded
+};
+
+CanvasView.prototype.getContext = function () {
+    try {
+        G_vmlCanvasManager.initElement(this.canvas);
+    } catch (err) {};
+
+    return this.canvas.getContext('2d');
 };
