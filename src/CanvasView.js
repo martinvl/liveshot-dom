@@ -7,6 +7,10 @@ module.exports = CanvasView;
 // --- Internal API ---
 CanvasView.prototype.initialize = function () {
     this.canvas = document.createElement('canvas');
+
+    try {
+        G_vmlCanvasManager.initElement(this.canvas);
+    } catch (err) {};
 };
 
 CanvasView.prototype.draw = function () {
