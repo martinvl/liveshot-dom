@@ -127,10 +127,28 @@ MegalinkRangeView.prototype.renderLogo = function (ctx, rect) {
         return;
     }
 
-    var left = rect.width - MegalinkRangeView.HEADER_MARGIN - this.logo.width;
-    var top = MegalinkRangeView.HEADER_MARGIN;
+    var maxRect = MegalinkRangeView.getLogoMaxRect(rect);
 
-    ctx.drawImage(this.logo, left, top);
+    var width = this.logo.width;
+    var height = this.logo.height;
+    var logoTooLarge = width > maxRect.width || height > maxRect.height;
+
+    if (logoTooLarge) {
+        var ratio = width / height;
+
+        if (width - maxRect.width > height - maxRect.height) {
+            width = maxRect.width;
+            height = maxRect.width / ratio;
+        } else {
+            width = maxRect.height * ratio;
+            height = maxRect.height;
+        }
+    }
+
+    var left = rect.x + rect.width - MegalinkRangeView.HEADER_MARGIN - width;
+    var top = rect.y + rect.height/2 - height/2;
+
+    ctx.drawImage(this.logo, left, top, width, height);
 };
 
 MegalinkRangeView.prototype.updateSize = function () {
@@ -218,10 +236,19 @@ MegalinkRangeView.getRangeRelayRect = function (rect) {
 
 MegalinkRangeView.getHostRect = function (rect) {
     return {
-        x:rect.x + rect.width/4,
+        x:rect.x + rect.width/4 + 2*MegalinkRangeView.HEADER_MARGIN,
         y:rect.y + 2*MegalinkRangeView.HEADER_MARGIN,
-        width:rect.width/2,
+        width:rect.width/2 - 4*MegalinkRangeView.HEADER_MARGIN,
         height:rect.height - 4*MegalinkRangeView.HEADER_MARGIN
+    };
+};
+
+MegalinkRangeView.getLogoMaxRect = function (rect) {
+    return {
+        x:rect.x + 5*rect.width/8,
+        y:rect.y + MegalinkRangeView.HEADER_MARGIN,
+        width:rect.width/4,
+        height:rect.height - 2*MegalinkRangeView.HEADER_MARGIN
     };
 };
 
