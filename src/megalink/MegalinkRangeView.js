@@ -1,4 +1,5 @@
 var MegalinkCardView = require('./MegalinkCardView');
+var RangeBuilder = require('liveshot-protocol').RangeBuilder;
 
 function MegalinkRangeView() {
     this.initialize();
@@ -7,7 +8,11 @@ function MegalinkRangeView() {
 module.exports = MegalinkRangeView;
 
 // --- External API ---
-MegalinkRangeView.prototype.setRange = function (range) {
+MegalinkRangeView.prototype.setRange = function (range, valid) {
+    if (!valid) {
+        range = RangeBuilder.sanitizeRange(range);
+    }
+
     this.range = range;
 
     var numCards = objectSize(range.cards);
@@ -30,7 +35,7 @@ MegalinkRangeView.prototype.setRange = function (range) {
         var card = range.cards[idx];
         var cardView = this.cardViews[i++];
 
-        cardView.setCard(card);
+        cardView.setCard(card, true);
     }
 
     this.updateSize();

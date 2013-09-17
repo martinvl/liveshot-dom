@@ -83,8 +83,7 @@ var rangeBuilder = new RangeBuilder()
     }
 
     rangeBuilder.setCards(cards);
-
-    rangeView.setRange(rangeBuilder.getRange());
+    rangeView.setRange(rangeBuilder.getRange(), true);
 }
 
 setInterval(render, 500);

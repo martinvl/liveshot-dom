@@ -11,10 +11,9 @@ module.exports = CardView;
 inherits(CardView, CanvasView);
 
 // --- External API ---
-CardView.prototype.setCard = function (card) {
-    // TODO validate card properly
-    if (!card) {
-        card = CardBuilder.createBlankCard();
+CardView.prototype.setCard = function (card, valid) {
+    if (!valid) {
+        card = CardBuilder.sanitizeCard(card);
     }
 
     this.card = card;
