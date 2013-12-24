@@ -93,6 +93,7 @@ MegalinkCardView.prototype.renderHeader = function (ctx, rect) {
     this.renderName(ctx, MegalinkCardView.getNameRect(rect));
     this.renderClub(ctx, MegalinkCardView.getClubRect(rect));
     this.renderClass(ctx, MegalinkCardView.getClassRect(rect));
+    this.renderCategory(ctx, MegalinkCardView.getCategoryRect(rect));
 };
 
 MegalinkCardView.prototype.renderName = function (ctx, rect) {
@@ -125,7 +126,18 @@ MegalinkCardView.prototype.renderClass = function (ctx, rect) {
     ctx.textAlign = "right";
 
     ctx.fillStyle = this.style.fontColor;
-    ctx.fillText(className, rect.x, rect.y);
+    ctx.fillText(className, rect.x + rect.width, rect.y + rect.height);
+};
+
+MegalinkCardView.prototype.renderCategory = function (ctx, rect) {
+    var category = this.card.shooter.category;
+
+    this.setFont(ctx, category, rect.width, rect.height);
+    ctx.textBaseline = "bottom";
+    ctx.textAlign = "right";
+
+    ctx.fillStyle = this.style.fontColor;
+    ctx.fillText(category, rect.x + rect.width, rect.y + rect.height);
 };
 
 MegalinkCardView.prototype.renderShotList = function (ctx, rect) {
@@ -343,11 +355,32 @@ MegalinkCardView.getClubRect = function (rect) {
 MegalinkCardView.getClassRect = function (rect) {
     var rect = MegalinkCardView.getHeaderRect(rect);
 
+    var width = 20;
+    var height = .35*(rect.height - 10);
+    var marginH = 5;
+    var marginV = 3;
+
     return {
-        x:rect.x + rect.width - 20,
-        y:rect.y + rect.height - 5,
-        width:20,
-        height:.35*(rect.height - 10)
+        x:this.getCategoryRect(rect).x - width - marginH,
+        y:rect.y + rect.height - height - marginV,
+        width:width,
+        height:height
+    };
+};
+
+MegalinkCardView.getCategoryRect = function (rect) {
+    var rect = MegalinkCardView.getHeaderRect(rect);
+
+    var width = 8;
+    var height = .35*(rect.height - 10);
+    var marginH = 5;
+    var marginV = 3;
+
+    return {
+        x:rect.x + rect.width - width - marginH,
+        y:rect.y + rect.height - height - marginV,
+        width:width,
+        height:height
     };
 };
 
