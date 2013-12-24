@@ -26,6 +26,11 @@ MegalinkCardView.prototype.initialize = function () {
         markerColor:'rgb(0, 255, 0)',
         lastMarkerColor:'rgb(255, 0, 0)'
     });
+
+    this.triangleRenderer.setStyle({
+        color:'rgb(248, 255, 0)',
+        borderColor:'rgb(0, 0, 0)',
+    });
 };
 
 MegalinkCardView.prototype.setTarget = function (targetID) {

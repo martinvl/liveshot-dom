@@ -70,7 +70,8 @@ var rangeBuilder = new RangeBuilder()
             .addShotData(Math.random()*r - .1, Math.random()*r - .1, value)
             .addShotData(Math.random()*r - .1, Math.random()*r - .1, value)
             .setSeriesSum(seriesSum)
-            .setTotalSum(totalSum);
+            .setTotalSum(totalSum)
+            .setMarking(Math.random() < .5);
 
     /*
     cardView.setCard(cardBuilder.getCard());

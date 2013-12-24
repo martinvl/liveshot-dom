@@ -32,6 +32,7 @@ CardView.prototype.initialize = function () {
 
     this.card = CardBuilder.createBlankCard();
     this.shotRenderer = new LiveShot.ShotRenderer();
+    this.triangleRenderer = new LiveShot.TriangleRenderer();
 };
 
 CardView.prototype.setTarget = function (targetID) {
@@ -92,6 +93,13 @@ CardView.prototype.renderTarget = function (ctx, rect) {
         .setContext(ctx)
         .setRect(targetRect)
         .render();
+
+    if (!this.card.result.marking) {
+        this.triangleRenderer
+            .setContext(ctx)
+            .setRect(targetRect)
+            .render();
+    }
 };
 
 CardView.prototype.getTargetRect = function (rect) {
