@@ -115,7 +115,7 @@ MegalinkCardView.prototype.renderClub = function (ctx, rect) {
     ctx.textAlign = "left";
 
     ctx.fillStyle = this.style.fontColor;
-    ctx.fillText(club, rect.x, rect.y);
+    ctx.fillText(club, rect.x, rect.y + rect.height);
 };
 
 MegalinkCardView.prototype.renderClass = function (ctx, rect) {
@@ -344,11 +344,16 @@ MegalinkCardView.getNameRect = function (rect) {
 MegalinkCardView.getClubRect = function (rect) {
     var rect = MegalinkCardView.getHeaderRect(rect);
 
+    var width = .6*(rect.width - 10);
+    var height = .35*(rect.height - 10);
+    var marginH = 5;
+    var marginV = 3;
+
     return {
         x:rect.x + 5,
-        y:rect.y + rect.height - 5,
-        width:.6*(rect.width - 10),
-        height:.35*(rect.height - 10)
+        y:rect.y + rect.height - height - marginV,
+        width:width,
+        height:height
     };
 };
 
