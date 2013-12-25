@@ -2,6 +2,10 @@ var inherits = require('inherits');
 var LiveShot = require('liveshot-core');
 var CardView = require('../CardView');
 
+// --- Constants ---
+var MARGINH = 5;
+var MARGINV = 3;
+
 function MegalinkCardView() {
     this.initialize();
 }
@@ -92,6 +96,7 @@ MegalinkCardView.prototype.renderHeader = function (ctx, rect) {
 
     this.renderName(ctx, MegalinkCardView.getNameRect(rect));
     this.renderClub(ctx, MegalinkCardView.getClubRect(rect));
+    this.renderSeriesName(ctx, MegalinkCardView.getSeriesNameRect(rect));
     this.renderClass(ctx, MegalinkCardView.getClassRect(rect));
     this.renderCategory(ctx, MegalinkCardView.getCategoryRect(rect));
 };
@@ -116,6 +121,17 @@ MegalinkCardView.prototype.renderClub = function (ctx, rect) {
 
     ctx.fillStyle = this.style.fontColor;
     ctx.fillText(club, rect.x, rect.y + rect.height);
+};
+
+MegalinkCardView.prototype.renderSeriesName = function (ctx, rect) {
+    var seriesName = this.card.result.seriesName;
+
+    this.setFont(ctx, seriesName, rect.width, rect.height);
+    ctx.textBaseline = "bottom";
+    ctx.textAlign = "left";
+
+    ctx.fillStyle = this.style.fontColor;
+    ctx.fillText(seriesName, rect.x, rect.y + rect.height);
 };
 
 MegalinkCardView.prototype.renderClass = function (ctx, rect) {
@@ -333,59 +349,70 @@ MegalinkCardView.getHeaderRect = function (rect) {
 MegalinkCardView.getNameRect = function (rect) {
     var rect = MegalinkCardView.getHeaderRect(rect);
 
+    var width = rect.width;
+    var height = .55*rect.height;
+
     return {
-        x:rect.x + 5,
-        y:rect.y + 3,
-        width:rect.width - 10,
-        height:.45*(rect.height - 6)
+        x:rect.x + MARGINH,
+        y:rect.y + MARGINV,
+        width:width - 2*MARGINH,
+        height:height - 2*MARGINV
     };
 };
 
 MegalinkCardView.getClubRect = function (rect) {
     var rect = MegalinkCardView.getHeaderRect(rect);
 
-    var width = .6*(rect.width - 10);
-    var height = .35*(rect.height - 10);
-    var marginH = 5;
-    var marginV = 3;
+    var width = .55*rect.width;
+    var height = .45*rect.height;
 
     return {
-        x:rect.x + 5,
-        y:rect.y + rect.height - height - marginV,
-        width:width,
-        height:height
+        x:rect.x + MARGINH,
+        y:rect.y + rect.height - height + MARGINV,
+        width:width - 3/2*MARGINH,
+        height:height - 2*MARGINV
+    };
+};
+
+MegalinkCardView.getSeriesNameRect = function (rect) {
+    var rect = MegalinkCardView.getHeaderRect(rect);
+
+    var width = .25*rect.width;
+    var height = .45*rect.height;
+
+    return {
+        x:rect.x + .55*rect.width + MARGINH/2,
+        y:rect.y + rect.height - height + MARGINV,
+        width:width - MARGINH,
+        height:height - 2*MARGINV
     };
 };
 
 MegalinkCardView.getClassRect = function (rect) {
     var rect = MegalinkCardView.getHeaderRect(rect);
 
-    var width = 20;
-    var height = .35*(rect.height - 10);
-    var marginH = 5;
-    var marginV = 3;
+    var width = .13*rect.width;
+    var height = .45*rect.height;
 
     return {
-        x:this.getCategoryRect(rect).x - width - marginH,
-        y:rect.y + rect.height - height - marginV,
-        width:width,
-        height:height
+        x:rect.x + .8*rect.width + MARGINH/2,
+        y:rect.y + rect.height - height + MARGINV,
+        width:width - MARGINH,
+        height:height - 2*MARGINV
     };
 };
 
 MegalinkCardView.getCategoryRect = function (rect) {
     var rect = MegalinkCardView.getHeaderRect(rect);
 
-    var width = 8;
-    var height = .35*(rect.height - 10);
-    var marginH = 5;
-    var marginV = 3;
+    var width = .07*rect.width;
+    var height = .45*rect.height;
 
     return {
-        x:rect.x + rect.width - width - marginH,
-        y:rect.y + rect.height - height - marginV,
-        width:width,
-        height:height
+        x:rect.x + .93*rect.width + MARGINH/2,
+        y:rect.y + rect.height - height + MARGINV,
+        width:width - 3/2*MARGINH,
+        height:height - 2*MARGINV
     };
 };
 
