@@ -33,7 +33,7 @@ MegalinkCardView.prototype.initialize = function () {
 
     this.triangleRenderer.setStyle({
         color:'rgb(248, 255, 0)',
-        borderColor:'rgb(0, 0, 0)',
+        borderColor:'rgb(0, 0, 0)'
     });
 };
 
