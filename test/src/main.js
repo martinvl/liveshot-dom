@@ -31,8 +31,11 @@ updateSize();
 window.onresize = updateSize;
 
 function updateSize() {
-    rangeView.el.style.width = window.innerWidth + 'px';
-    rangeView.el.style.height = window.innerHeight + 'px';
+    var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    rangeView.el.style.width = width + 'px';
+    rangeView.el.style.height = height + 'px';
 
     rangeView.updateSize();
     rangeView.draw();
