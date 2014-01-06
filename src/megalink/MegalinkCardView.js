@@ -6,6 +6,9 @@ var CardView = require('../CardView');
 var MARGINH = 5;
 var MARGINV = 3;
 
+var LANE_NUMBER_BACK_COLOR = 'rgba(64, 64, 64, 0.7)';
+var LANE_NUMBER_FRONT_COLOR = 'rgb(245, 245, 245)';
+
 function MegalinkCardView() {
     this.initialize();
 }
@@ -80,6 +83,7 @@ MegalinkCardView.prototype.updateScale = function () {
 
 MegalinkCardView.prototype.render = function (ctx, rect) {
     this.renderTarget(ctx, rect);
+    this.renderLaneNumber(ctx, rect);
     this.renderHeader(ctx, rect);
     this.renderShotList(ctx, rect);
     this.renderSums(ctx, rect);
@@ -154,6 +158,21 @@ MegalinkCardView.prototype.renderCategory = function (ctx, rect) {
 
     ctx.fillStyle = this.style.fontColor;
     ctx.fillText(category, rect.x + rect.width, rect.y + rect.height);
+};
+
+MegalinkCardView.prototype.renderLaneNumber = function (ctx, rect) {
+    rect = MegalinkCardView.getLaneNumberRect(rect);
+    var laneNumber = this.card.lane;
+
+    ctx.fillStyle = LANE_NUMBER_BACK_COLOR;
+    ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+
+    this.setFont(ctx, laneNumber, .8*rect.width, .8*rect.height);
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = LANE_NUMBER_FRONT_COLOR;
+    ctx.fillText(laneNumber, rect.x + rect.width/2, rect.y + rect.height/2);
 };
 
 MegalinkCardView.prototype.renderShotList = function (ctx, rect) {
@@ -432,6 +451,16 @@ MegalinkCardView.getShotListRect = function (rect) {
             height:.55*rect.height
         };
     }
+};
+
+MegalinkCardView.getLaneNumberRect = function (rect) {
+    var targetRect = MegalinkCardView.getTargetRect(rect);
+    var size = Math.min(targetRect.width, targetRect.height) / 5;
+
+    targetRect.width = size;
+    targetRect.height = size;
+
+    return targetRect;
 };
 
 MegalinkCardView.getSumsRect = function (rect) {
