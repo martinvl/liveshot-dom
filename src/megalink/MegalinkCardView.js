@@ -6,6 +6,16 @@ var CardView = require('../CardView');
 var MARGINH = 5;
 var MARGINV = 3;
 
+var BACKGROUND_COLOR = 'rgb(255, 255, 255)';
+var FONT_COLOR = 'rgb(0, 0, 0)';
+
+var GAUGE_COLOR = 'rgb(0, 0, 0)';
+var MARKER_COLOR = 'rgb(0, 255, 0)';
+var LAST_MARKER_COLOR = 'rgb(255, 0, 0)';
+
+var TRIANGLE_COLOR = 'rgb(248, 255, 0)';
+var TRIANGLE_BORDER_COLOR = 'rgb(0, 0, 0)';
+
 var LANE_NUMBER_BACK_COLOR = 'rgba(64, 64, 64, 0.7)';
 var LANE_NUMBER_FRONT_COLOR = 'rgb(245, 245, 245)';
 
@@ -21,22 +31,22 @@ MegalinkCardView.prototype.initialize = function () {
     CardView.prototype.initialize.apply(this);
 
     this.style = {
-        backgroundColor:'rgb(255, 255, 255)',
-        fontColor:'rgb(0, 0, 0)'
+        backgroundColor:BACKGROUND_COLOR,
+        fontColor:FONT_COLOR
     };
 
     this.canvas = document.createElement('canvas');
 
     this.shotRenderer = new LiveShot.ShotRenderer();
     this.shotRenderer.setStyle({
-        gaugeColor:'rgb(0, 0, 0)',
-        markerColor:'rgb(0, 255, 0)',
-        lastMarkerColor:'rgb(255, 0, 0)'
+        gaugeColor:GAUGE_COLOR,
+        markerColor:MARKER_COLOR,
+        lastMarkerColor:LAST_MARKER_COLOR
     });
 
     this.triangleRenderer.setStyle({
-        color:'rgb(248, 255, 0)',
-        borderColor:'rgb(0, 0, 0)'
+        color:TRIANGLE_COLOR,
+        borderColor:TRIANGLE_BORDER_COLOR
     });
 };
 
