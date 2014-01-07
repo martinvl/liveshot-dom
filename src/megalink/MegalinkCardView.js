@@ -6,6 +6,8 @@ var CardView = require('../CardView');
 var MARGINH = 5;
 var MARGINV = 3;
 
+var MAX_SHOTS = 10;
+
 var BACKGROUND_COLOR = 'rgb(255, 255, 255)';
 var FONT_COLOR = 'rgb(0, 0, 0)';
 
@@ -222,14 +224,15 @@ MegalinkCardView.prototype.renderList = function (ctx, rect) {
 };
 
 MegalinkCardView.prototype.renderShots = function (ctx, rect) {
-    var shots = this.card.result.shots;
-
+    var offset = Math.max(0, this.card.result.shots.length - MAX_SHOTS);
+    var shots = this.card.result.shots.slice(-MAX_SHOTS);
     var shotNum = 1;
+
     for (var idx in shots) {
         var shot = shots[idx];
         var shotRect = this.getShotRect(shotNum, rect);
 
-        this.renderShot(ctx, shotNum, shot, shotRect);
+        this.renderShot(ctx, shotNum + offset, shot, shotRect);
 
         ++shotNum;
     }
