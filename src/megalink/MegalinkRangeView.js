@@ -53,12 +53,6 @@ MegalinkRangeView.prototype.initialize = function () {
     this.header = document.createElement('canvas');
     this.el.appendChild(this.header);
 
-    this.el.onclick = function () {
-        toggleFullscreen();
-
-        return false;
-    };
-
     this.cardViews = [];
 };
 
@@ -265,52 +259,6 @@ MegalinkRangeView.prototype.getHeaderContext = function () {
 
     return this.header.getContext('2d');
 };
-
-// --- Fullscreen handling ---
-function toggleFullscreen() {
-    if (isFullscreen()) {
-        exitFullscreen();
-    } else {
-        requestFullscreen();
-    }
-
-}
-
-function fullscreenAvailable() {
-    var docElm = document.documentElement;
-    return (docElm.requestFullscreen || docElm.requestFullScreen ||
-            docElm.mozRequestFullScreen || docElm.webkitRequestFullScreen);
-}
-
-function isFullscreen() {
-    return (document.fullscreen || document.fullScreen ||
-            document.mozFullScreen || document.webkitIsFullScreen);
-}
-
-function requestFullscreen() {
-    var docElm = document.documentElement;
-    if (docElm.requestFullScreen) {
-        docElm.requestFullScreen();
-    } else if (docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-    } else if (docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-    } else if (docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-    }
-}
-
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-    } else if (document.webkitCancelFullScreen) {
-        document.webkitCancelFullScreen();
-    } else if (document.cancelFullscreen) {
-        document.cancelFullscreen();
-    }
-}
 
 function objectSize(object) {
     var size = 0;
