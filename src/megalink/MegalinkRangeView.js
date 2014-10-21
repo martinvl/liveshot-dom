@@ -49,6 +49,7 @@ MegalinkRangeView.HEADER_FONT_COLOR = 'rgb(0, 0, 0)';
 
 MegalinkRangeView.prototype.initialize = function () {
     this.el = document.createElement('div');
+    this.el.style.position = 'relative';
 
     this.header = document.createElement('canvas');
     this.el.appendChild(this.header);
@@ -151,11 +152,14 @@ MegalinkRangeView.prototype.renderLogo = function (ctx, rect) {
 };
 
 MegalinkRangeView.prototype.updateSize = function () {
+    var pixelRatio = window.devicePixelRatio;
     var width = this.el.clientWidth;
-    var height = this.el.clientHeight - MegalinkRangeView.HEADER_HEIGHT;
+    var height = this.el.clientHeight - MegalinkRangeView.HEADER_HEIGHT/pixelRatio;
 
-    this.header.width = width;
+    this.header.width = width*pixelRatio;
     this.header.height = MegalinkRangeView.HEADER_HEIGHT;
+    this.header.style.width = width + 'px';
+    this.header.style.height = MegalinkRangeView.HEADER_HEIGHT/pixelRatio + 'px';
 
     var N = this.cardViews.length;
     var minBadness = Number.MAX_VALUE;
@@ -198,13 +202,17 @@ MegalinkRangeView.prototype.updateSize = function () {
 
             var leftEdge = Math.floor(j*cardWidth);
             var rightEdge = Math.floor((j + 1)*cardWidth);
-            cardView.canvas.width = rightEdge - leftEdge;
-            cardView.canvas.style.width = cardView.canvas.width + 'px';
+            cardView.canvas.width = (rightEdge - leftEdge)*pixelRatio;
+            cardView.canvas.style.width = (rightEdge - leftEdge) + 'px';
 
             var topEdge = Math.floor(i*cardHeight);
             var bottomEdge = Math.floor((i + 1)*cardHeight);
-            cardView.canvas.height = bottomEdge - topEdge;
-            cardView.canvas.style.height = cardView.canvas.height + 'px';
+            cardView.canvas.height = (bottomEdge - topEdge)*pixelRatio;
+            cardView.canvas.style.height = (bottomEdge - topEdge) + 'px';
+
+            cardView.canvas.style.position = 'absolute';
+            cardView.canvas.style.top = (topEdge + MegalinkRangeView.HEADER_HEIGHT/pixelRatio) + 'px';
+            cardView.canvas.style.left = leftEdge + 'px';
         }
     }
 };
