@@ -15,8 +15,8 @@ var GAUGE_COLOR = 'rgb(0, 0, 0)';
 var MARKER_COLOR = 'rgb(0, 255, 0)';
 var LAST_MARKER_COLOR = 'rgb(255, 0, 0)';
 
-var TRIANGLE_COLOR = 'rgb(248, 255, 0)';
-var TRIANGLE_BORDER_COLOR = 'rgb(0, 0, 0)';
+var TRIANGLE_COLOR = 'rgb(200, 200, 200)';
+var TRIANGLE_BORDER_COLOR = 'rgb(150, 150, 150)';
 
 var LANE_NUMBER_BACK_COLOR = 'rgba(64, 64, 64, 0.7)';
 var LANE_NUMBER_FRONT_COLOR = 'rgb(245, 245, 245)';
