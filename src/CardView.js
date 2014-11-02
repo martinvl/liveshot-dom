@@ -94,14 +94,12 @@ CardView.prototype.renderTarget = function (ctx, rect) {
         .setRect(targetRect)
         .render();
 
-    /*
     if (!this.card.result.marking) {
         this.triangleRenderer
             .setContext(ctx)
             .setRect(targetRect)
             .render();
     }
-    */
 };
 
 CardView.prototype.getTargetRect = function (rect) {
