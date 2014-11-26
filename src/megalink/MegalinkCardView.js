@@ -239,17 +239,17 @@ MegalinkCardView.prototype.renderShots = function (ctx, rect) {
 };
 
 MegalinkCardView.prototype.renderShot = function (ctx, shotNum, shot, rect) {
-    this.setFont(ctx, '', rect.width, .9*rect.height);
-    ctx.textBaseline = 'bottom';
+    this.setFont(ctx, '10:', .4*rect.width, .9*rect.height);
+    ctx.textBaseline = 'middle';
     ctx.fillStyle = this.style.fontColor;
 
     // draw shot number
-    ctx.textAlign = 'right';
-    ctx.fillText(shotNum + ':', rect.x + .3*rect.width, rect.y);
+    ctx.textAlign = 'left';
+    ctx.fillText(shotNum + ':', rect.x + 3, rect.y - rect.height/2);
 
     // draw shot value
     ctx.textAlign = 'right';
-    ctx.fillText(shot.value, rect.x + rect.width - 5, rect.y);
+    ctx.fillText(shot.value, rect.x + rect.width - 5, rect.y - rect.height/2);
 };
 
 MegalinkCardView.prototype.getShotRect = function (shotNum, rect) {
