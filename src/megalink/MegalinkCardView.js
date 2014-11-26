@@ -245,7 +245,7 @@ MegalinkCardView.prototype.renderShot = function (ctx, shotNum, shot, rect) {
 
     // draw shot number
     ctx.textAlign = 'left';
-    ctx.fillText(shotNum + ':', rect.x + 3, rect.y - rect.height/2);
+    ctx.fillText(shotNum + ':', rect.x + 5, rect.y - rect.height/2);
 
     // draw shot value
     ctx.textAlign = 'right';
